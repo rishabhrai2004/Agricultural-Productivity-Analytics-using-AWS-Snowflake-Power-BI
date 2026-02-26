@@ -11,19 +11,20 @@ https://app.powerbi.com/view?r=eyJrIjoiNGVjYTkzNjEtNzU1ZS00Zjg5LWFmNzAtOGY4NDIyY
 
 ## Project Overview  
 
-This project analyzes **agricultural productivity** by evaluating environmental factors such as **rainfall, temperature, and humidity** across crops, regions, seasons, and years.  
+This project analyzes agricultural productivity by evaluating environmental factors such as rainfall, temperature, humidity, irrigation type, soil characteristics, seasons, and yearly performance.
 
-The goal is to enable **data-driven crop planning and strategic agricultural decision-making** through interactive analytics.
+The objective is to build a secure end-to-end cloud data pipeline integrating AWS S3, Snowflake, and Power BI to enable data-driven agricultural decision-making.
 
 ---
 
-## Core Objectives  
+## Architecture Overview  
 
-- Identify **highest yielding crops**
-- Compare **regional agricultural performance**
-- Analyze **seasonal productivity variations**
-- Detect **year-wise yield fluctuations**
-- Understand **environmental impact on crop output**
+Amazon S3 (Raw Dataset)  
+→ AWS IAM Role (Secure Access Control)  
+→ Snowflake Storage Integration  
+→ External Stage  
+→ Data Transformation (SQL)  
+→ Power BI Dashboard  
 
 ---
 
@@ -32,6 +33,7 @@ The goal is to enable **data-driven crop planning and strategic agricultural dec
 | Layer | Technology |
 |-------|------------|
 | Data Storage | Amazon S3 |
+| Access Management | AWS IAM |
 | Data Warehouse | Snowflake |
 | Data Transformation | Snowflake SQL |
 | Visualization | Power BI Desktop |
@@ -40,66 +42,102 @@ The goal is to enable **data-driven crop planning and strategic agricultural dec
 
 ---
 
-## Data Engineering Pipeline  
+# AWS Setup
 
-1. Created **Amazon S3 bucket** and uploaded raw dataset  
-2. Configured **IAM Role** for Snowflake–S3 integration  
-3. Created **Integration Object in Snowflake**  
-4. Loaded dataset into Snowflake from S3  
-5. Performed **data validation and SQL transformations**  
-6. Created calculated column **"Rainfall Groups"**  
-7. Imported transformed dataset into **Power BI Desktop**  
-8. Published report to **Power BI Service**
+### 1. S3 Bucket Creation
 
----
+![AWS S3 Bucket](images/aws_s3_bucket.png)
 
-## Data Modeling  
+### 2. Dataset Object Uploaded
 
-### Calculated Column (Snowflake SQL)
+![AWS S3 Object](images/aws_s3_object.png)
 
-**Rainfall Groups Classification**
+### 3. IAM Role Configuration
 
-- 255 – 1200 → **Low**
-- 1200 – 2800 → **Medium**
-- 2800 – 4103 → **High**
+![AWS IAM Role](images/aws_iam_role.png)
+
+### 4. IAM Trust Relationship
+
+![AWS IAM Trust Policy](images/aws_iam_trust_policy.png)
+
+This ensures secure cross-service authentication between Snowflake and AWS.
 
 ---
 
-### DAX Measures Created  
+# Snowflake Implementation
 
-```DAX
-Total Yield = SUM(Agriculture[Yield])
+### 1. Storage Integration
 
-Avg Rainfall = AVERAGE(Agriculture[Rainfall])
+![Snowflake Storage Integration](images/snowflake_storage_integration.png)
 
-Avg Temperature = AVERAGE(Agriculture[Temperature])
+### 2. Stage Creation
 
-Avg Humidity = AVERAGE(Agriculture[Humidity])
-```
+![Snowflake Stage Creation](images/snowflake_stage_creation.png)
+
+### 3. Data Loading (COPY INTO)
+
+![Snowflake Copy Into](images/snowflake_copy_into.png)
+
+### 4. Aggregation Query Validation
+
+![Snowflake Aggregation](images/snowflake_aggregation_query.png)
+
+### 5. Year Group Transformation
+
+![Snowflake Year Group](images/snowflake_year_group_transformation.png)
+
+### 6. Rainfall Group Transformation
+
+![Snowflake Rainfall Group](images/snowflake_rainfall_group_transformation.png)
+
+This demonstrates structured feature engineering and classification logic.
 
 ---
 
-## Dashboard Structure  
+# Data Engineering Pipeline  
 
-The report consists of four analytical pages:
-
-- **Rainfall Analysis**
-- **Temperature Analysis**
-- **Humidity Analysis**
-- **Yield Analysis**
-
-Each page provides crop-wise, region-wise, season-wise, and year-wise breakdowns.
+1. Created Amazon S3 bucket and uploaded raw dataset  
+2. Configured IAM Role for Snowflake–S3 secure integration  
+3. Created storage integration object in Snowflake  
+4. Created external stage referencing S3  
+5. Loaded dataset into Snowflake warehouse  
+6. Performed validation and aggregation checks  
+7. Implemented Year Group transformation  
+8. Implemented Rainfall classification logic  
+9. Connected Snowflake to Power BI  
+10. Built interactive multi-page dashboard  
+11. Published report to Power BI Service  
 
 ---
 
-## Key Insights  
+# Power BI Dashboard  
+
+## Rainfall Analysis
+
+![Rainfall Analysis](images/rainfall_analysis.png)
+
+## Temperature Analysis
+
+![Temperature Analysis](images/temperature_analysis.png)
+
+## Humidity Analysis
+
+![Humidity Analysis](images/humidity_analysis.png)
+
+## Yield Analysis
+
+![Yield Analysis](images/yield_analysis.png)
+
+---
+
+# Key Insights  
 
 ### 1. Crop Yield Analysis  
 
-- Highest Yielding Crop: **Cotton (~51K)**
-- Second Highest: **Coconut (~34K)**
-- Third Highest: **Ginger (~26K)**
-- Lowest Yielding Crop: **Cardamom (~7K)**
+- Highest Yielding Crop: **Cotton (~51K)**  
+- Second Highest: **Coconut (~34K)**  
+- Third Highest: **Ginger (~26K)**  
+- Lowest Yielding Crop: **Cardamom (~7K)**  
 
 Cotton significantly outperforms other crops in overall productivity.
 
@@ -107,9 +145,9 @@ Cotton significantly outperforms other crops in overall productivity.
 
 ### 2. Year-wise Yield Trend  
 
-- Peak Yield: **2010 (~28.7K)**
-- Major Drop: **2015 (~16.4K)**
-- Recovery observed in later years (~27.8K)
+- Peak Yield: **2010 (~28.7K)**  
+- Major Drop: **2015 (~16.4K)**  
+- Recovery observed in later years (~27.8K)**  
 
 Agricultural productivity shows strong year-to-year fluctuations.
 
@@ -117,9 +155,9 @@ Agricultural productivity shows strong year-to-year fluctuations.
 
 ### 3. Regional Performance  
 
-- Top Performing Region: **Kodagu (~28.7K)**
-- Followed by: Mysuru and Madikeri
-- Lowest Performing Region: **Davangere (~11.8K)**
+- Top Performing Region: **Kodagu (~28.7K)**  
+- Followed by: Mysuru and Madikeri  
+- Lowest Performing Region: **Davangere (~11.8K)**  
 
 Regional environmental conditions strongly influence yield.
 
@@ -127,9 +165,9 @@ Regional environmental conditions strongly influence yield.
 
 ### 4. Seasonal Performance  
 
-- Highest Yield: **Rabi (~24.9K)**
-- Moderate: Zaid (~22.0K)
-- Lower: Kharif (~20.2K)
+- Highest Yield: **Rabi (~24.9K)**  
+- Moderate: Zaid (~22.0K)  
+- Lower: Kharif (~20.2K)**  
 
 Season selection plays a major role in maximizing productivity.
 
@@ -137,20 +175,21 @@ Season selection plays a major role in maximizing productivity.
 
 ### 5. Environmental Impact  
 
-- Rainfall shows **moderate association** with yield  
+- Rainfall shows moderate association with yield  
 - Temperature alone does not guarantee higher productivity  
-- Humidity variation remains minimal (~55–56)
+- Humidity variation remains stable (~55–56)**  
 
-Yield depends on **multi-factor environmental interaction**, not a single variable.
+Yield depends on multi-factor environmental interaction.
 
 ---
 
-## Project Outcome  
+# Project Outcome  
 
 This project demonstrates:
 
-- End-to-end **cloud-based data pipeline**
-- SQL-driven **data transformation**
-- DAX-based **analytical modeling**
-- Multi-page interactive dashboard design
-- Insight extraction for **strategic agricultural planning**
+- End-to-end cloud-based data pipeline  
+- Secure AWS–Snowflake integration  
+- SQL-driven feature engineering  
+- DAX-based analytical modeling  
+- Multi-page interactive dashboard  
+- Insight extraction for strategic agricultural planning
