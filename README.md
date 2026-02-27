@@ -1,4 +1,7 @@
 # Agricultural Productivity Analytics using AWS, Snowflake & Power BI
+
+![Architecture Overview](images/architecture_overview.png)
+
 ---
 
 ## Dashboard Link  
@@ -89,7 +92,6 @@ This ensures secure cross-service authentication between Snowflake and AWS.
 
 ![Snowflake Rainfall Group](images/snowflake_rainfall_group_transformation.png)
 
-
 ---
 
 # Data Engineering Pipeline  
@@ -132,10 +134,10 @@ This ensures secure cross-service authentication between Snowflake and AWS.
 
 ### 1. Crop Yield Analysis  
 
-- Highest Yielding Crop: **Cotton (~51K)**  
-- Second Highest: **Coconut (~34K)**  
-- Third Highest: **Ginger (~26K)**  
-- Lowest Yielding Crop: **Cardamom (~7K)**  
+- Highest Yielding Crop: Cotton (~51K)  
+- Second Highest: Coconut (~34K)  
+- Third Highest: Ginger (~26K)  
+- Lowest Yielding Crop: Cardamom (~7K)  
 
 Cotton significantly outperforms other crops in overall productivity.
 
@@ -143,9 +145,9 @@ Cotton significantly outperforms other crops in overall productivity.
 
 ### 2. Year-wise Yield Trend  
 
-- Peak Yield: **2010 (~28.7K)**  
-- Major Drop: **2015 (~16.4K)**  
-- Recovery observed in later years (~27.8K)**  
+- Peak Yield: 2010 (~28.7K)  
+- Major Drop: 2015 (~16.4K)  
+- Recovery observed in later years (~27.8K)  
 
 Agricultural productivity shows strong year-to-year fluctuations.
 
@@ -153,9 +155,9 @@ Agricultural productivity shows strong year-to-year fluctuations.
 
 ### 3. Regional Performance  
 
-- Top Performing Region: **Kodagu (~28.7K)**  
+- Top Performing Region: Kodagu (~28.7K)  
 - Followed by: Mysuru and Madikeri  
-- Lowest Performing Region: **Davangere (~11.8K)**  
+- Lowest Performing Region: Davangere (~11.8K)  
 
 Regional environmental conditions strongly influence yield.
 
@@ -163,9 +165,9 @@ Regional environmental conditions strongly influence yield.
 
 ### 4. Seasonal Performance  
 
-- Highest Yield: **Rabi (~24.9K)**  
+- Highest Yield: Rabi (~24.9K)  
 - Moderate: Zaid (~22.0K)  
-- Lower: Kharif (~20.2K)**  
+- Lower: Kharif (~20.2K)  
 
 Season selection plays a major role in maximizing productivity.
 
@@ -175,7 +177,7 @@ Season selection plays a major role in maximizing productivity.
 
 - Rainfall shows moderate association with yield  
 - Temperature alone does not guarantee higher productivity  
-- Humidity variation remains stable (~55–56)**  
+- Humidity variation remains stable (~55–56)  
 
 Yield depends on multi-factor environmental interaction.
 
@@ -190,4 +192,4 @@ This project demonstrates:
 - SQL-driven feature engineering  
 - DAX-based analytical modeling  
 - Multi-page interactive dashboard  
-- Insight extraction for strategic agricultural planning
+- Insight extraction for strategic agricultural planning  
