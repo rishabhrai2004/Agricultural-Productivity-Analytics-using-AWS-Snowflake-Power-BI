@@ -89,7 +89,6 @@ This ensures secure cross-service authentication between Snowflake and AWS.
 
 ![Snowflake Rainfall Group](images/snowflake_rainfall_group_transformation.png)
 
-This demonstrates structured feature engineering and classification logic.
 
 ---
 
